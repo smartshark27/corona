@@ -1,7 +1,7 @@
 const PDF_DATA_TEXT_TABLE_PREFIX = "Western Pacific Region";
 const PDF_DATA_TEXT_TABLE_SUFFIX = "Subtotal";
 
-function loadData() {
+function loadData(dataMap) {
   const pdfURL = generatePDFURL();
   getPDFText(pdfURL, 4, 8, parseRawText);
 }
@@ -19,8 +19,7 @@ function parseRawText(text) {
 
   const reducedText = text.slice(tableStart, tableEnd);
   const split = reducedText.split("   ").filter(item => item !== "");
-  
-  const countryStats = new Map();
+
   var region;
   var i = 0;
   while (i < split.length) {
@@ -28,18 +27,19 @@ function parseRawText(text) {
       region = split[i];
       i++;
     } else {
-      countryStats.set(split[i], {
+      dataMap.set(split[i], {
         region: region,
-        totalCases: split[i+1],
-        totalNewCases: split[i+2],
-        totalDeaths: split[i+3],
-        totalNewDeaths: split[i+4],
+        totalCases: Number(split[i+1]),
+        totalNewCases: Number(split[i+2]),
+        totalDeaths: Number(split[i+3]),
+        totalNewDeaths: Number(split[i+4]),
       });
       i += 7;
     }
   }
 
-  console.log(countryStats);
+  console.log(dataMap);
+  drawBubbles(dataMap);
 }
 
 function isString(string) {

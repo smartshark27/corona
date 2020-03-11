@@ -5,10 +5,6 @@ function fitToScreen() {
   const canvas = getElement("canvas");
   canvas.setAttribute("width", width);
   canvas.setAttribute("height", height);
-
-  const background = getElement("background");
-  background.setAttribute("width", width);
-  background.setAttribute("height", height);
 }
 
 function getElement(id) {
@@ -31,3 +27,45 @@ function getDateString(timezone) {
     .join("")
     .slice(0, 8); // e.g. 20190310
 }
+
+function getRandomPositionOn(rectID) {
+  const rect = getElement(rectID);
+  const width = canvas.getAttribute("width");
+  const height = canvas.getAttribute("height");
+  const x = generateRandomNumberBetween(0, width);
+  const y = generateRandomNumberBetween(0, height);
+  return [x, y];
+}
+
+function generateRandomNumberBetween(min, max) {
+  return Math.floor(Math.random() * max) + min;
+}
+
+function drawCircle(id, x, y, r, fill) {
+  const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+  circle.setAttribute('id', id);
+  circle.setAttribute("cx", x);
+  circle.setAttribute("cy", y);
+  circle.setAttribute("r", r);
+  circle.setAttribute("fill", fill);
+  getElement("canvas").appendChild(circle);
+}
+
+function removeElement(id) {
+  const element = getElement(id);
+  if (element) {
+    element.remove();
+  }
+}
+
+// function drawText(x, y, content, size) {
+//   const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+
+//   text.setAttribute("dominant-baseline", "middle");
+//   text.setAttribute("text-anchor", "middle");
+//   text.setAttribute("x", x);
+//   text.setAttribute("y", y);
+//   text.setAttribute("font-size", size);
+//   getElement("canvas").appendChild(text);
+//   text.textContent = content;
+// }

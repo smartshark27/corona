@@ -1,4 +1,10 @@
+const dataMap = new Map();
+
 function handleLoad() {
   fitToScreen();
-  loadData();
+  loadData(dataMap);
+}
+
+function handleClick() {
+  redrawBubbles(dataMap);
 }
