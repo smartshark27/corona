@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Corona</title>
+    <meta name="viewport" content="user-scalable=no" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.3.200/pdf.min.js"></script>
+    <script type="text/javascript" src="src/config.js"></script>
+    <script type="text/javascript" src="src/data.js"></script>
+    <script type="text/javascript" src="src/handler.js"></script>
+    <script type="text/javascript" src="src/pdf.js"></script>
+    <script type="text/javascript" src="src/util.js"></script>
+  </head>
+
+  <body>
+    <svg
+      id="canvas"
+      style="touch-action: manipulation; position: absolute; left: 0; top: 0; font-family: 'Lucida Console', Monaco, monospace;"
+      onload="handleLoad()"
+    >
+      <rect
+        id="background"
+        x="0"
+        y="0"
+        width="1"
+        height="1"
+        fill="white"
+      ></rect>
+    </svg>
+  </body>
+</html>

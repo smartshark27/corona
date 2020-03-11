@@ -1,0 +1,4 @@
+function handleLoad() {
+  fitToScreen();
+  loadData();
+}
