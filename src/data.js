@@ -1,5 +1,16 @@
+const PDF_DATA_TEXT_TABLE_PREFIX = "Western Pacific Region";
+const PDF_DATA_TEXT_TABLE_SUFFIX = "Subtotal";
+
 function loadData() {
-  getPDFText(PDF_URL, 4, 8, parseRawText);
+  const pdfURL = generatePDFURL();
+  getPDFText(pdfURL, 4, 8, parseRawText);
+}
+
+function generatePDFURL() {
+  const prefix = "https://www.who.int/docs/default-source/coronaviruse/situation-reports/";
+  const suffix = "-sitrep-50-covid-19.pdf";
+  const dateString = getDateString('Europe/Paris');
+  return prefix + dateString + suffix;
 }
 
 function parseRawText(text) {
