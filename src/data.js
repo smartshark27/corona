@@ -8,8 +8,10 @@ function loadData(dataMap) {
 
 function generatePDFURL() {
   const prefix = "https://www.who.int/docs/default-source/coronaviruse/situation-reports/";
-  const suffix = "-sitrep-50-covid-19.pdf";
-  const dateString = getDateString('Europe/Paris');
+  // const suffix = "-sitrep-50-covid-19.pdf";
+  const suffix = "-sitrep-51-covid-19.pdf"; // Placeholder until further notice
+  // const dateString = getDateString('Europe/Paris');
+  const dateString = "20200311"
   return prefix + dateString + suffix;
 }
 
