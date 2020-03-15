@@ -11,23 +11,6 @@ function getElement(id) {
   return document.getElementById(id);
 }
 
-function getDateString(timezone) {
-  const options = {
-    timeZone: timezone,
-    day: "2-digit",
-    month: "2-digit",
-    year: "numeric"
-  };
-
-  const date = new Date();
-  date.setDate(date.getDate() - 1);
-  return date
-    .toLocaleDateString("ko-KR", options)
-    .split(". ")
-    .join("")
-    .slice(0, 8); // e.g. 20190310
-}
-
 function getRandomPositionOn(rectID) {
   const rect = getElement(rectID);
   const width = canvas.getAttribute("width");
@@ -42,8 +25,11 @@ function generateRandomNumberBetween(min, max) {
 }
 
 function drawCircle(id, x, y, r, fill) {
-  const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-  circle.setAttribute('id', id);
+  const circle = document.createElementNS(
+    "http://www.w3.org/2000/svg",
+    "circle"
+  );
+  circle.setAttribute("id", id);
   circle.setAttribute("cx", x);
   circle.setAttribute("cy", y);
   circle.setAttribute("r", r);
@@ -69,3 +55,38 @@ function removeElement(id) {
 //   getElement("canvas").appendChild(text);
 //   text.textContent = content;
 // }
+
+function parseCSVFromURL(url) {
+  return new Promise((resolve, reject) => {
+    getTextContentFromURL(url).then(text => {
+      const rows = text.split("\n").map(row => row.split(","));
+      const columnNames = rows[0];
+      const data = rows.slice(1, rows.length).map(row => {
+        const obj = {};
+        for (var i = 0; i < columnNames.length; i++) {
+          obj[columnNames[i]] = row[i];
+        }
+        return obj;
+      });
+      resolve(data);
+    });
+  });
+}
+
+function getTextContentFromURL(url) {
+  return new Promise((resolve, reject) => {
+    const request = new XMLHttpRequest();
+    request.open("GET", url);
+    request.onreadystatechange = function() {
+      if (request.readyState === 4 && request.status === 200) {
+        const text = request.responseText;
+        if (text) {
+          resolve(text);
+        } else {
+          reject("No text at URL");
+        }
+      }
+    };
+    request.send();
+  });
+}

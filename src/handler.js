@@ -1,10 +1,13 @@
-const dataMap = new Map();
+var data;
 
 function handleLoad() {
   fitToScreen();
-  loadData(dataMap);
+  loadData().then(loadedData => {
+    data = loadedData;
+    drawBubbles(data);
+  });
 }
 
 function handleClick() {
-  redrawBubbles(dataMap);
+  redrawBubbles(data);
 }

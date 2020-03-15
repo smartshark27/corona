@@ -1,25 +1,25 @@
 const BUBBLE_FILL = "Red";
 // const FONT_SIZE = "24";
 
-function drawBubbles(dataMap) {
-    dataMap.forEach((stats, country) => {
-        drawBubble(stats, country);
-    });
+function drawBubbles() {
+  data.forEach(row => {
+    drawBubble(Number(row.total_deaths) / 10, row.location);
+  });
 }
 
-function drawBubble(stats, country) {
-    const [x, y] = getRandomPositionOn("canvas");
-    drawCircle(country, x, y, stats.totalDeaths, BUBBLE_FILL);
-    // drawText(x, y, country, FONT_SIZE);
+function drawBubble(radius, country) {
+  const [x, y] = getRandomPositionOn("canvas");
+  drawCircle(country, x, y, radius, BUBBLE_FILL);
+  // drawText(x, y, country, FONT_SIZE);
 }
 
-function redrawBubbles(dataMap) {
-    removeBubbles(dataMap);
-    drawBubbles(dataMap);
+function redrawBubbles() {
+  removeBubbles();
+  drawBubbles();
 }
 
-function removeBubbles(dataMap) {
-    dataMap.forEach((_, country) => {
-        removeElement(country);
-    });
+function removeBubbles() {
+  data.forEach(row => {
+    removeElement(row.location);
+  });
 }
