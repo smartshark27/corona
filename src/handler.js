@@ -1,13 +1,13 @@
-var data;
-
 function handleLoad() {
   fitToScreen();
-  loadData().then(loadedData => {
-    data = loadedData;
+  loadData().then(() => {
     drawBubbles(data);
+    addDateMessage();
+    drawAllText();
   });
 }
 
 function handleClick() {
   redrawBubbles(data);
+  redrawAllText();
 }

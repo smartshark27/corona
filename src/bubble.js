@@ -1,6 +1,3 @@
-const BUBBLE_FILL = "Red";
-// const FONT_SIZE = "24";
-
 function drawBubbles() {
   data.forEach(row => {
     drawBubble(Number(row.total_deaths) / 10, row.location);
@@ -9,8 +6,8 @@ function drawBubbles() {
 
 function drawBubble(radius, country) {
   const [x, y] = getRandomPositionOn("canvas");
-  drawCircle(country, x, y, radius, BUBBLE_FILL);
-  // drawText(x, y, country, FONT_SIZE);
+  const fill = country === "Australia" ? "Green" : "Red";
+  drawCircle(country, x, y, radius, fill);
 }
 
 function redrawBubbles() {

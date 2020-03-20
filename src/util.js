@@ -44,17 +44,18 @@ function removeElement(id) {
   }
 }
 
-// function drawText(x, y, content, size) {
-//   const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+function drawText(id, x, y, content, size) {
+  const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
 
-//   text.setAttribute("dominant-baseline", "middle");
-//   text.setAttribute("text-anchor", "middle");
-//   text.setAttribute("x", x);
-//   text.setAttribute("y", y);
-//   text.setAttribute("font-size", size);
-//   getElement("canvas").appendChild(text);
-//   text.textContent = content;
-// }
+  text.setAttribute("id", id);
+  text.setAttribute("dominant-baseline", "middle");
+  text.setAttribute("text-anchor", "middle");
+  text.setAttribute("x", x);
+  text.setAttribute("y", y);
+  text.setAttribute("font-size", size);
+  getElement("canvas").appendChild(text);
+  text.textContent = content;
+}
 
 function parseCSVFromURL(url) {
   return new Promise((resolve, reject) => {
